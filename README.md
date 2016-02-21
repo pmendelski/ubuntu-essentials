@@ -1,7 +1,13 @@
 # Ubuntu essentials
 
-Simple build system built with bash scripts to manage installation of ubuntu dependencies.
+My personal Ubuntu Desktop essential packages.
 
-## Target user
+## Install
 
-Target user of this essentials-package is a software developer who uses many programming languages.
+```sh
+cd ubuntu-essentials
+./install
+
+# Prints manual
+./install --help
+```

@@ -127,5 +127,5 @@ printInfo() {
 }
 
 printDebug() {
-    [ $verbose = 1 ] && println "  $1"
+    [ $verbose = 1 ] && println "  $1" || :
 }
