@@ -172,7 +172,8 @@ while (("$#")); do
             exit 0;
             ;;
         --resume|-r)
-            resume
+            resume;
+            exit 0;
             ;;
         --) # End of all options.
             shift
