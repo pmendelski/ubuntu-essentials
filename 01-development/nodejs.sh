@@ -14,6 +14,7 @@ sudo ln -sf /usr/bin/nodejs /usr/local/bin/node
 sudo npm cache clean -f
 sudo npm install -g n
 sudo n stable
+sudo npm install -g http-server gulp eslint
 "
 
 # https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers

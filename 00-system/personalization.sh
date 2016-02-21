@@ -17,3 +17,6 @@ package "alarm-clock-applet"
 # redshift
 package "redshift-gtk"
 
+# clipboard
+package "xclip"
+
