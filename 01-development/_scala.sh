@@ -14,8 +14,8 @@ sudo rm -rf "/usr/lib/scala/scala-${version}"
 sudo mv "/tmp/scala-${version}" "/usr/lib/scala/"
 
 # Create symbolic link
-sudo rm -f "/usr/lib/scala/scala-current"
-sudo ln -s "/usr/lib/scala/scala-${version}" "/usr/lib/scala/scala-current"
+sudo rm -f "/usr/lib/scala/default"
+sudo ln -s "/usr/lib/scala/scala-${version}" "/usr/lib/scala/default"
 
 # Update alternatives
 for binfile in $(find /usr/lib/scala/scala-${version}/bin -executable -type f ! -name "*.bat"); do

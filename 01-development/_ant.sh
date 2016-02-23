@@ -14,8 +14,8 @@ sudo rm -rf "/usr/lib/ant/apache-ant-${version}"
 sudo mv "/tmp/apache-ant-${version}" "/usr/lib/ant/"
 
 # Create symbolic link
-sudo rm -f "/usr/lib/ant/apache-ant-current"
-sudo ln -s "/usr/lib/ant/apache-ant-${version}" "/usr/lib/ant/apache-ant-current"
+sudo rm -f "/usr/lib/ant/default"
+sudo ln -s "/usr/lib/ant/apache-ant-${version}" "/usr/lib/ant/default"
 
 # Update alternatives
 for binfile in $(find /usr/lib/ant/apache-ant-${version}/bin -executable -type f ! -name "*.bat" ! -name "*.py" ! -name "*.pl"); do

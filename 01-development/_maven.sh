@@ -14,8 +14,8 @@ sudo rm -rf "/usr/lib/mvn/apache-maven-${version}"
 sudo mv "/tmp/apache-maven-${version}" "/usr/lib/mvn/"
 
 # Create symbolic link
-sudo rm -f "/usr/lib/mvn/apache-maven-current"
-sudo ln -s "/usr/lib/mvn/apache-maven-${version}" "/usr/lib/mvn/apache-maven-current"
+sudo rm -f "/usr/lib/mvn/default"
+sudo ln -s "/usr/lib/mvn/apache-maven-${version}" "/usr/lib/mvn/default"
 
 # Update ubuntu alternatives
 for binfile in $(find /usr/lib/mvn/apache-maven-${version}/bin -executable -type f ! -name "*.bat"); do

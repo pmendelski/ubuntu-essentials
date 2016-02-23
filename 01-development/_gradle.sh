@@ -14,8 +14,8 @@ sudo rm -rf "/usr/lib/gradle/gradle-${version}"
 sudo mv "/tmp/gradle-${version}" "/usr/lib/gradle/"
 
 # Create symbolic link
-sudo rm -f "/usr/lib/gradle/gradle-current"
-sudo ln -s "/usr/lib/gradle/gradle-${version}" "/usr/lib/gradle/gradle-current"
+sudo rm -f "/usr/lib/gradle/default"
+sudo ln -s "/usr/lib/gradle/gradle-${version}" "/usr/lib/gradle/default"
 
 # Update alternatives
 for binfile in $(find /usr/lib/gradle/gradle-${version}/bin -executable -type f ! -name "*.bat"); do

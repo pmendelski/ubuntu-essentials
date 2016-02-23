@@ -24,8 +24,8 @@ sudo rm -rf "/usr/lib/sbt/sbt-${version}"
 sudo mv "/tmp/sbt-${version}" "/usr/lib/sbt/"
 
 # Create symbolic link
-sudo rm -f "/usr/lib/sbt/sbt-current"
-sudo ln -s "/usr/lib/sbt/sbt-${version}" "/usr/lib/sbt/sbt-current"
+sudo rm -f "/usr/lib/sbt/default"
+sudo ln -s "/usr/lib/sbt/sbt-${version}" "/usr/lib/sbt/default"
 
 # Update ubuntu alternatives
 for binfile in $(find /usr/lib/sbt/sbt-${version} -executable -type f); do

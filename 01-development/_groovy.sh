@@ -14,8 +14,8 @@ sudo rm -rf "/usr/lib/groovy/groovy-${version}"
 sudo mv "/tmp/groovy-${version}" "/usr/lib/groovy/"
 
 # Create symbolic link
-sudo rm -f "/usr/lib/groovy/groovy-current"
-sudo ln -s "/usr/lib/groovy/groovy-${version}" "/usr/lib/groovy/groovy-current"
+sudo rm -f "/usr/lib/groovy/default"
+sudo ln -s "/usr/lib/groovy/groovy-${version}" "/usr/lib/groovy/default"
 
 # Update alternatives
 for binfile in $(find /usr/lib/groovy/groovy-${version}/bin -executable -type f ! -name "*.bat"); do
