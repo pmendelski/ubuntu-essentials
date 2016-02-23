@@ -1,34 +1,40 @@
 #!/bin/bash -e
 
-# declare -r version="3.3.9";
+# Build download url
 declare -r version="$(curl -L http://www.scala-lang.org/download/all.html | grep "/download/[0-9]" | grep -v "\-RC" | grep -v "\-M" | grep -v "\.final" | grep -Po "\d+.\d+.\d+" | head -n 1)"
 declare -r url="http://downloads.typesafe.com/scala/${version}/scala-${version}.tgz"
-declare -r exportFile="$HOME/.bash_exports"
 
+# Fetch and extract
 rm -rf "/tmp/scala-${version}*"
 trap "rm -rf /tmp/scala-${version}*" EXIT
 wget -LP /tmp "$url"
 tar -zxf "/tmp/scala-${version}.tgz" -C /tmp
-[ -d "/usr/lib/scala" ] || sudo mkdir -p "/usr/lib/scala"
-[ -d "/usr/lib/scala/scala-${version}" ] && sudo rm -r "/usr/lib/scala/scala-${version}" || :
+sudo mkdir -p "/usr/lib/scala"
+sudo rm -rf "/usr/lib/scala/scala-${version}"
 sudo mv "/tmp/scala-${version}" "/usr/lib/scala/"
 
+# Create symbolic link
+sudo rm -f "/usr/lib/scala/scala-current"
+sudo ln -s "/usr/lib/scala/scala-${version}" "/usr/lib/scala/scala-current"
+
+# Update alternatives
 for binfile in $(find /usr/lib/scala/scala-${version}/bin -executable -type f ! -name "*.bat"); do
     declare binname="$(basename $binfile)"
     sudo update-alternatives --install "/usr/bin/$binname" "$binname" "$binfile" 1000
 done;
 
-touch "$exportFile"
-if [ -z "$JAVA_HOME" ] && ! grep -qc 'JAVA_HOME' "$exportFile"; then
-cat <<EOT | tee -a "$exportFile"
+# Add system variables
+touch "$HOME/.bash_exports"
+if [ -z "$JAVA_HOME" ] && ! grep -qc 'JAVA_HOME' "$HOME/.bash_exports"; then
+cat <<EOT | tee -a "$HOME/.bash_exports"
 
 # Java
 export JAVA_HOME="\$(update-alternatives --get-selections | grep -e "^java " | tr -s " " | cut -d " " -f 3 | sed -s "s|/jre/bin/java||")"
 EOT
 fi
 
-if [ -z "$SCALA_HOME" ] && ! grep -qc 'SCALA_HOME' "$exportFile"; then
-cat <<EOT | tee -a "$exportFile"
+if [ -z "$SCALA_HOME" ] && ! grep -qc 'SCALA_HOME' "$HOME/.bash_exports"; then
+cat <<EOT | tee -a "$HOME/.bash_exports"
 
 # Scala
 export SCALA_HOME="\$(update-alternatives --get-selections | grep -e "^scala " | tr -s " " | cut -d " " -f 3 | sed -s "s|/bin/scala||")"
