@@ -41,4 +41,6 @@ export GROOVY_HOME="\$(update-alternatives --get-selections | grep -e "^groovy "
 EOT
 fi
 
+groovy -v
+
 echo "Gradle v${version} installed"

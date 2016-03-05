@@ -44,4 +44,6 @@ export M3_HOME="\$MAVEN_HOME"
 EOT
 fi
 
+mvn -v
+
 echo "Maven v${version} installed"

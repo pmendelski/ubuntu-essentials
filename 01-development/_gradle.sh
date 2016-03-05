@@ -41,4 +41,6 @@ export GRADLE_HOME="\$(update-alternatives --get-selections | grep -e "^gradle "
 EOT
 fi
 
+gradle -v
+
 echo "Gradle v${version} installed"

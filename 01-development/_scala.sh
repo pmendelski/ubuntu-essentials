@@ -41,4 +41,6 @@ export SCALA_HOME="\$(update-alternatives --get-selections | grep -e "^scala " |
 EOT
 fi
 
+scalac -version
+
 echo "Scala v${version} installed"

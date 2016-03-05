@@ -41,4 +41,6 @@ export ANT_HOME="\$(update-alternatives --get-selections | grep -e "^ant " | tr 
 EOT
 fi
 
+ant -version
+
 echo "ANT v${version} installed"

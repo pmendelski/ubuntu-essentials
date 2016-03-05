@@ -44,6 +44,6 @@ EOT
 fi
 
 # Initial run - downloads missing dependencies
-sbt -v
+sbt sbtVersion
 
 echo "SBT v${version} installed"
