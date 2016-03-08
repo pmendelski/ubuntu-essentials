@@ -22,7 +22,10 @@ cat "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions.bak" | sed \
     -e "s/\(-Xms\).*/\12g/" \
     -e "s/\(-Xmx\).*/\13g/" \
     -e "s/\(-XX:ReservedCodeCacheSize=\).*/\11g/" \
+    -e "s/\(-Dawt.useSystemAAFontSettings=\).*/\1on/" \
     > "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions"
+    
+echo "-Dswing.aatext=true" >> "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions"
 
 # Remove previos desktop entry if exists
 sudo rm -f /usr/share/applications/jetbrains-*.desktop
