@@ -23,13 +23,17 @@ package "alien"
 # Mounting remote file system by ssh
 package "sshfs"
 
+# Terminator - better terminal
+package "terminator"
+script_after "
+gconftool --type string --set /desktop/gnome/applications/terminal/exec terminator
+"
+
 # Wine
 package "wine"
 
 # others
-package "curl"
 package	"tree"
-package	"vim"
 
 # copy to clipboard
 package	"xclip"

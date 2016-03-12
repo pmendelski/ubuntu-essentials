@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # nautilus
-package "nautilus-open-terminal"
 package "nautilus-actions"
 
 # conky
@@ -16,7 +15,3 @@ package "alarm-clock-applet"
 
 # redshift
 package "redshift-gtk"
-
-# clipboard
-package "xclip"
-

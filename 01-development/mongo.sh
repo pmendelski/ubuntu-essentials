@@ -6,3 +6,6 @@ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | 
 "
 package "mongodb-10gen"
 
+script_after "
+sudo update-rc.d -f mongodb remove
+"
