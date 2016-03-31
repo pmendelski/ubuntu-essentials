@@ -32,9 +32,10 @@ gconftool --type string --set /desktop/gnome/applications/terminal/exec terminat
 # Wine
 package "wine"
 
-# others
-package	"tree"
+# Copy to clipboard
+package "xclip"
+package "xsel"
 
-# copy to clipboard
-package	"xclip"
-package	"xsel"
+# Utils like: sponge
+package "moreutils"
+package "tree"
