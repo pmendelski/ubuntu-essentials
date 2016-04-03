@@ -6,8 +6,8 @@
 
 # Build download url
 declare -r url="http://downloads.datastax.com/devcenter"
-declare -r version="$(curl -L $url | grep -Po "DevCenter-\d+.\d+.\d+-linux-gtk-x86.tar.gz" | tail -n 1 | grep -Po "\d.\d.\d")"
-declare -r package="DevCenter-${version}-linux-gtk-x86.tar.gz"
+declare -r version="$(curl -L $url | grep -Po "DevCenter-\d+.\d+.\d+-linux-gtk-x86_64.tar.gz" | tail -n 1 | grep -Po "\d.\d.\d")"
+declare -r package="DevCenter-${version}-linux-gtk-x86_64.tar.gz"
 declare -r tmpdir="/tmp/devcenter"
 
 # Fetch and extract
