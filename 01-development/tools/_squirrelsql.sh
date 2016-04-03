@@ -1,13 +1,25 @@
-# SQL viewer
-# http://downloads.sourceforge.net/project/squirrel-sql/1-stable/3.7.0/squirrel-sql-3.7-standard.jar?r=&ts=1459428996&use_mirror=kent
+#!/bin/bash -e
 
-# SQL Visualizer
-# https://www.dbvis.com/product_download/dbvis-9.2.15/media/dbvis_linux_9_2_15.deb
+# SQuirreL SQL
+# http://squirrel-sql.sourceforge.net/
 
-# Cassandra Viewer
-# Site: http://www.planetcassandra.org/devcenter/
-# http://downloads.datastax.com/devcenter/DevCenter-1.5.0-linux-gtk-x86_64.tar.gz
+# Build download url
+declare -r version="$(curl -kL https://sourceforge.net/projects/squirrel-sql/files/1-stable/ | grep -Po "stable/\d+\.\d+\.\d+-plainzip" | head -n 1 | grep -Po "\d.\d.\d")"
+declare -r shortVersion="${version%.0}"
+declare -r shorterVersion="${shortVersion%.0}"
+declare -r package="squirrelsql-${shorterVersion}-optional.zip"
+declare -r url="http://downloads.sourceforge.net/project/squirrel-sql/1-stable/${version}-plainzip/${package}?ts=$(date +%s)&use_mirror=tenet"
+declare -r tmpdir="/tmp/squirrelsql"
 
-# MongoDB Viewer
-# Site: https://robomongo.org/download
-# https://download.robomongo.org/0.9.0-rc7/linux/robomongo-0.9.0-rc7-linux-x86_64-2b7a8ca.tar.gz
+# Fetch and extract
+rm -rf "$tmpdir"
+mkdir -p "$tmpdir"
+trap "rm -rf $tmpdir" EXIT
+wget "$url" -LP "$tmpdir"
+unzip "$tmpdir/$package" -d "$tmpdir"
+
+# move the executable to somewhere in your PATH
+sudo rm -fr "/opt/squirrelsql"
+sudo mv -fT "$tmpdir/${package%.zip}" "/opt/squirrelsql"
+
+echo "Installed squirrelsql v$version from $url"

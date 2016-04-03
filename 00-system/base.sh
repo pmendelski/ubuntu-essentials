@@ -39,3 +39,8 @@ package "xsel"
 # Utils like: sponge
 package "moreutils"
 package "tree"
+
+# Looking for files inside packages
+# Example: apt-file search /usr/lib/jvm/java-6-openjdk/jre/lib/i386/xawt/libmawt.so
+package "apt-file"
+script_after "apt-file update"

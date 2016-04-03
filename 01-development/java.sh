@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Default JRE is needed for swing/awt applications
+package "default-jre"
+
+# Newest JDK for programming purposes
 repository "ppa:webupd8team/java"
 package "oracle-java8-installer"
 
