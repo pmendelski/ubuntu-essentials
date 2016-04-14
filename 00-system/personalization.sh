@@ -3,6 +3,9 @@
 # nautilus
 package "nautilus-actions"
 
+# gedit plugins 
+package "gedit-plugins"
+
 # conky
 package "conky" "conky-all"
 
