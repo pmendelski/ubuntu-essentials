@@ -65,6 +65,7 @@ install() {
         if ([ -f $CONFIG_BEFORE_FILE ]); then
             printSuccess ">>> Executing: before-scripts"
             source $CONFIG_BEFORE_FILE
+            [ ! -f $REPOSITORIES_FILE ] && sudo apt-get update
             rm $CONFIG_BEFORE_FILE
             printSuccess "<<< Finished: before-scripts"
         fi
@@ -90,15 +91,12 @@ install() {
     fi
 }
 
-function main() {
-    reset
+function installAll() {
     filter="${filter:-*}"
     dir="${dir:-*}"
-
     for dir in `find . -maxdepth 1 -mindepth 1 -name "$dir" -type d 2>/dev/null | sort`; do
         if askForConfirmation "Do you want to install packages from '$dir'?"; then
             printInfo "Intstalling scripts from $dir"
-
             for f in `find $dir -type f -name "$filter" ! -name "_*" ! -name "*~" 2>/dev/null | sort`; do
                 if askForConfirmation "Do you want to install packages from '$f'?"; then
                     source $f
@@ -106,7 +104,6 @@ function main() {
                     printWarn "Omitted install script: $f"
                 fi
             done
-
             for f in `find $dir -type f -name "$filter" -name "_*" ! -name "*~" 2>/dev/null | sort`; do
                 if askForConfirmation "Do you want to run install scripts from '$f'?"; then
                     script_after "bash -e $f"
@@ -118,6 +115,37 @@ function main() {
             printWarn "Omitted directory: $dir"
         fi
     done
+}
+
+function installFiles() {
+    filter="${filter:-.*}"
+    dir="${dir:-.*}"
+    for f in `echo $files | grep "$dir" | grep "$filter" | grep -v "_.*" | grep -v "~.*" | sort`; do
+        if askForConfirmation "Do you want to install packages from '$f'?"; then
+            source $f
+        else
+            printWarn "Omitted install script: $f"
+        fi
+    done
+    for f in `echo $files | grep "$dir" | grep "$filter" | grep "_.*" | grep -v "~.*" | sort`; do
+        if askForConfirmation "Do you want to run install scripts from '$f'?"; then
+            script_after "bash -e $f"
+        else
+            printWarn "Omitted install script: $f"
+        fi
+    done
+}
+
+function main() {
+    reset
+
+    if [ -n "$files" ]; then
+        printInfo "Installing files: $files"
+        installFiles
+    else
+        printInfo "Installing all"
+        installAll
+    fi
 
     if [ dryrun = 0 ]; then
         printInfo "Install skipped because of dryrun"
@@ -142,17 +170,17 @@ function printHelp() {
     echo "  essentials - Ubuntu essentials. Source: https://github.com/mendlik/ubuntu-essentials"
     echo ""
     echo "SYNOPSIS"
-    echo "  ./install.sh [OPTION]..."
+    echo "  ./install.sh [OPTIONS]... [FILES]"
     echo ""
     echo "OPTIONS"
     echo "  -r, --resume          Resume installation process from last error"
     echo "  -f, --force           Force 'Yes' answer to all questions"
     echo "  -v, --verbose         Print additional logs"
     echo "  -s, --silent          Disable logs. Except confirmations."
-    echo "  -n, --nocolor         Disable colors"
-    echo "  -d, --dir <VALUE>     Filter install directories"
-    echo "  -f, --filter <VALUE>  Filter install scripts"
+    echo "  -c, --nocolor         Disable colors"
     echo "  -h, --help            Print help"
+    echo "  --dir <VALUE>         Filter install directories by name"
+    echo "  --name <VALUE>        Filter install scripts by name"
     echo ""
 }
 
@@ -167,14 +195,14 @@ while (("$#")); do
         --silent|-s)
             silent=1
             ;;
-        --nocolor|-n)
+        --nocolor|-c)
             nocolor=1
             ;;
-        --dir|-d)
+        --dir)
             shift
             dir=$1
             ;;
-        --filter|-f)
+        --name)
             shift
             filter=$1
             ;;
@@ -197,6 +225,9 @@ while (("$#")); do
             println "Unknown option: $1"
             println "Try --help option"
             exit 1;
+            ;;
+        *) # Not an option.
+            files="$files $1"
             ;;
     esac
     shift
