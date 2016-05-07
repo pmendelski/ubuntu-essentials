@@ -19,15 +19,12 @@ sudo mv "$dirname" "/opt/idea/idea-IC-${version}"
 # Change vmoptions
 cp "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions" "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions.bak"
 cat "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions.bak" | sed \
-    -e "s/\(-Xms\).*/\12g/" \
-    -e "s/\(-Xmx\).*/\13g/" \
-    -e "s/\(-XX:ReservedCodeCacheSize=\).*/\11g/" \
-    -e "s/\(-Dawt.useSystemAAFontSettings=\).*/\1on/" \
+    -e "s/\(-Xms\).*/\11g/" \
+    -e "s/\(-Xmx\).*/\12g/" \
+    -e "s/\(-XX:ReservedCodeCacheSize=\).*/\1512m/" \
     > "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions"
-    
-echo "-Dswing.aatext=true" >> "/opt/idea/idea-IC-${version}/bin/idea64.vmoptions"
 
 # Remove previos desktop entry if exists
-sudo rm -f /usr/share/applications/jetbrains-*.desktop
+# sudo rm -f /usr/share/applications/jetbrains-*.desktop
 
 echo "Intellij IDEA v${version} installed in /opt/idea/idea-IC-${version}"
