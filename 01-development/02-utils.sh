@@ -8,10 +8,10 @@ package "httpie"
 package "jq"
 
 # Geeky editor
-package	"vim"
+package "vim"
 
 # Pygmentize
-package	"python-pygments"
+package "python-pygments"
 
 # Pure fun
 # Quote of the day

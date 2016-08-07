@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-declare -r url=$(curl -L "https://data.services.jetbrains.com/products/releases?code=IIU%2CIIC&latest=true&type=release" | sed -ne "s/.*\"IIU\":\[.*\"linux\":{.*\"link\":\"\([^\"]*\)\".*/\1/p")
+declare -r url=$(curl -L "https://data.services.jetbrains.com/products/releases?code=IIU%2CIIC&latest=true&type=release" | jq -r .IIU[0].downloads.linux.link
 declare -r fileName=$(echo "$url" | grep -o "[^/]\+$")
 declare -r version=$(echo "$fileName" | grep -o "[^/]\+$" | grep -Po "\d+(\.\d+){0,2}")
 
@@ -17,12 +17,12 @@ sudo rm -rf "/opt/idea/idea-IU-${version}"
 sudo mv "$dirname" "/opt/idea/idea-IU-${version}"
 
 # Change vmoptions
-cp "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions" "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions.bak"
-cat "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions.bak" | sed \
-    -e "s/\(-Xms\).*/\11g/" \
-    -e "s/\(-Xmx\).*/\12g/" \
-    -e "s/\(-XX:ReservedCodeCacheSize=\).*/\1512m/" \
-    > "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions"
+# cp "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions" "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions.bak"
+# cat "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions.bak" | sed \
+#     -e "s/\(-Xms\).*/\11g/" \
+#     -e "s/\(-Xmx\).*/\12g/" \
+#     -e "s/\(-XX:ReservedCodeCacheSize=\).*/\1512m/" \
+#     > "/opt/idea/idea-IU-${version}/bin/idea64.vmoptions"
 
 # Remove previos desktop entry if exists
 # sudo rm -f /usr/share/applications/jetbrains-*.desktop

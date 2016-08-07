@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 declare -r version="$(curl -LIs "https://github.com/ericchiang/pup/releases/latest" | grep Location | tail -n 1 | sed -n "s|Location: .\+/tag/\([^/]\+\)|\1|p" | tr -d "\r")"
-declare -r url="https://github.com/ericchiang/pup/releases/download/$version/pup_linux_amd64.zip"
+declare -r url="https://github.com/ericchiang/pup/releases/download/$version/pup_${version}_linux_amd64.zip"
 
 rm -rf "/tmp/pup"
 mkdir -p /tmp/pup

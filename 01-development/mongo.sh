@@ -1,11 +1,8 @@
 #!/bin/bash
 
 script_before "
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
-echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/10gen.list
+. /etc/lsb-release
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+echo 'deb http://repo.mongodb.org/apt/ubuntu $(lsb_release -sc)/mongodb-org/3.2 multiverse' | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 "
-package "mongodb-10gen"
-
-script_after "
-sudo update-rc.d -f mongodb remove
-"
+package "mongodb-org"

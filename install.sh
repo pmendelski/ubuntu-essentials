@@ -12,11 +12,12 @@ declare -i dryrun=0
 declare filter
 declare dir
 
-declare -r REPOSITORIES_FILE=".repositories"
-declare -r PACKAGES_FILE=".packages"
-declare -r CONFIG_BEFORE_FILE=".config-before"
-declare -r CONFIG_AFTER_FILE=".config-after"
-declare -r LOCK_FILE=".lock"
+declare -r BASE_DIR=".install"
+declare -r REPOSITORIES_FILE="$BASE_DIR/repositories.sh"
+declare -r PACKAGES_FILE="$BASE_DIR/packages.sh"
+declare -r CONFIG_BEFORE_FILE="$BASE_DIR/config-before.sh"
+declare -r CONFIG_AFTER_FILE="$BASE_DIR/config-after.sh"
+declare -r LOCK_FILE="$BASE_DIR/lock"
 
 repository() {
     for repo in "$@"
@@ -58,6 +59,7 @@ reset() {
     [ -f $REPOSITORIES_FILE ] && rm $REPOSITORIES_FILE || printDebug "No repositories file"
     [ -f $PACKAGES_FILE ] && rm $PACKAGES_FILE || printDebug "No packages file"
     [ -f $CONFIG_AFTER_FILE ] && rm $CONFIG_AFTER_FILE || printDebug "No after-scripts file"
+    [ -d $BASE_DIR ] && rm -r $BASE_DIR || printDebug "No install base dir"
 }
 
 install() {
@@ -88,23 +90,29 @@ install() {
             rm $CONFIG_AFTER_FILE
             printSuccess "<<< Finished: after-scripts"
         fi
+        # Clean apt-get registry
+        sudo apt-get update
+        sudo apt-get clean
+        sudo apt-get autoremove
+        sudo apt-get update && sudo apt-get upgrade
+        sudo dpkg --configure -a
     fi
 }
 
 function installAll() {
     filter="${filter:-*}"
     dir="${dir:-*}"
-    for dir in `find . -maxdepth 1 -mindepth 1 -name "$dir" -type d 2>/dev/null | sort`; do
+    for dir in `find . -maxdepth 1 -mindepth 1 -name "$dir" -type d ! -name "$BASE_DIR" 2>/dev/null | sort`; do
         if askForConfirmation "Do you want to install packages from '$dir'?"; then
             printInfo "Intstalling scripts from $dir"
-            for f in `find $dir -type f -name "$filter" ! -name "_*" ! -name "*~" 2>/dev/null | sort`; do
+            for f in `find $dir -type f -name "$filter" ! -name "_*" ! -name "*~" 2>/dev/null | LC_COLLATE=C sort`; do
                 if askForConfirmation "Do you want to install packages from '$f'?"; then
                     source $f
                 else
                     printWarn "Omitted install script: $f"
                 fi
             done
-            for f in `find $dir -type f -name "$filter" -name "_*" ! -name "*~" 2>/dev/null | sort`; do
+            for f in `find $dir -type f -name "$filter" -name "_*" ! -name "*~" 2>/dev/null | LC_COLLATE=C sort`; do
                 if askForConfirmation "Do you want to run install scripts from '$f'?"; then
                     script_after "bash -e $f"
                 else
@@ -138,7 +146,7 @@ function installFiles() {
 
 function main() {
     reset
-
+    mkdir -p $BASE_DIR
     if [ -n "$files" ]; then
         printInfo "Installing files: $files"
         installFiles

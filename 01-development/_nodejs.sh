@@ -4,4 +4,4 @@ git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git check
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 . ~/.nvm/nvm.sh
 nvm install node
-sudo npm install -g http-server gulp eslint npm-check-updates
+npm install -g http-server gulp eslint npm-check-updates

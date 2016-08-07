@@ -3,7 +3,7 @@
 # nautilus
 package "nautilus-actions"
 
-# gedit plugins 
+# gedit plugins
 package "gedit-plugins"
 
 # conky
@@ -23,3 +23,41 @@ package "redshift-gtk"
 # http://www.omgubuntu.co.uk/2013/12/logitech-unifying-receiver-linux-solaar
 # repository "ppa:daniel.pavel/solaar"
 # package "solaar"
+
+# Unity tweak tool
+# Go to Dash > Unity tweak tool > themes
+package "unity-tweak-tool"
+
+# Arc ubuntu theme
+script_before "
+echo 'deb http://download.opensuse.org/repositories/home:/Horst3180/xUbuntu_16.04/ /' | sudo tee /etc/apt/sources.list.d/arc-theme.list
+wget -qO - http://download.opensuse.org/repositories/home:Horst3180/xUbuntu_16.04/Release.key | sudo apt-key add -
+"
+package "arc-theme"
+
+# Moka icon theme
+repository "ppa:moka/daily"
+package "moka-icon-theme"
+
+# Wallpapers from previous versions
+package "ubuntu-wallpapers-karmic"
+package "ubuntu-wallpapers-lucid"
+package "ubuntu-wallpapers-maverick"
+package "ubuntu-wallpapers-natty"
+package "ubuntu-wallpapers-oneiric"
+package "ubuntu-wallpapers-precise"
+package "ubuntu-wallpapers-quantal"
+package "ubuntu-wallpapers-raring"
+package "ubuntu-wallpapers-saucy"
+package "ubuntu-wallpapers-trusty"
+package "ubuntu-wallpapers-utopic"
+package "ubuntu-wallpapers-vivid"
+package "ubuntu-wallpapers-wily"
+package "ubuntu-wallpapers-xenial"
+
+# Some basic UI config changes
+script_after "
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity 0.36
+gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity-maximized-toggle true
+"
