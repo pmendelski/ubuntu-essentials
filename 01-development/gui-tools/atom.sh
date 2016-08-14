@@ -11,6 +11,8 @@ apm install \
     highlight-selected \
     linter \
     linter-eslint \
+    linter-lua \
+    language-lua \
     merge-conflicts \
     minimap \
     minimap-highlight-selected \
