@@ -8,7 +8,7 @@ package "httpie"
 package "jq"
 
 # Geeky editor
-package "vim"
+package "vim-gtk"
 
 # Pygmentize
 package "python-pygments"

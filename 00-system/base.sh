@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Better terminal
+package "tmux"
+package "zsh"
+
 # System autostart deamons
 package "sysv-rc-conf"
 

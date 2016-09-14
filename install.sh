@@ -32,7 +32,7 @@ package() {
     for pack in "$@"
     do
         echo "printInfo \"[PACKAGE] $pack\"" >> $PACKAGES_FILE
-        echo "sudo apt-get -qq install -y --force-yes $pack && printSuccess \"Package installed successfully: $pack\"" >> $PACKAGES_FILE
+        echo "sudo apt-get -qq install -y $pack && printSuccess \"Package installed successfully: $pack\"" >> $PACKAGES_FILE
         printInfo "[PACKAGE] Registered package: $pack"
     done
 }
@@ -102,7 +102,7 @@ install() {
 function installAll() {
     filter="${filter:-*}"
     dir="${dir:-*}"
-    for dir in `find . -maxdepth 1 -mindepth 1 -name "$dir" -type d ! -name "$BASE_DIR" 2>/dev/null | sort`; do
+    for dir in `find . -maxdepth 1 -mindepth 1 -name "$dir" -type d ! -name "$BASE_DIR" ! -name ".git" 2>/dev/null | sort`; do
         if askForConfirmation "Do you want to install packages from '$dir'?"; then
             printInfo "Intstalling scripts from $dir"
             for f in `find $dir -type f -name "$filter" ! -name "_*" ! -name "*~" 2>/dev/null | LC_COLLATE=C sort`; do
@@ -182,7 +182,7 @@ function printHelp() {
     echo ""
     echo "OPTIONS"
     echo "  -r, --resume          Resume installation process from last error"
-    echo "  -f, --force           Force 'Yes' answer to all questions"
+    echo "  -f, --force           Assume 'Yes' answer to all questions"
     echo "  -v, --verbose         Print additional logs"
     echo "  -s, --silent          Disable logs. Except confirmations."
     echo "  -c, --nocolor         Disable colors"
