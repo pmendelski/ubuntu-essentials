@@ -7,6 +7,7 @@ package "atom"
 script_after "
 apm install \
     editorconfig \
+    docblockr \
     highlight-line \
     highlight-selected \
     linter \
