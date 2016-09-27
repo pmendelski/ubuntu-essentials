@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-declare -r url=$(curl -L "https://data.services.jetbrains.com/products/releases?code=IIU%2CIIC&latest=true&type=release" | jq -r .IIC[0].downloads.linux.link
+declare -r url=$(curl -L "https://data.services.jetbrains.com/products/releases?code=IIU%2CIIC&latest=true&type=release" | jq -r .IIC[0].downloads.linux.link)
 declare -r fileName=$(echo "$url" | grep -o "[^/]\+$")
 declare -r version=$(echo "$fileName" | grep -o "[^/]\+$" | grep -Po "\d+(\.\d+){0,2}")
 
