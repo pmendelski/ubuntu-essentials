@@ -19,6 +19,10 @@ package "alarm-clock-applet"
 # redshift
 package "redshift-gtk"
 
+# compiz configuration
+package "compizconfig-settings-manager"
+package "compiz-plugins-extra"
+
 # Logitech unifying receiver
 # http://www.omgubuntu.co.uk/2013/12/logitech-unifying-receiver-linux-solaar
 # repository "ppa:daniel.pavel/solaar"
