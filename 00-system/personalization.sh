@@ -22,6 +22,7 @@ package "redshift-gtk"
 # compiz configuration
 package "compizconfig-settings-manager"
 package "compiz-plugins-extra"
+package "dconf-editor"
 
 # Logitech unifying receiver
 # http://www.omgubuntu.co.uk/2013/12/logitech-unifying-receiver-linux-solaar
@@ -58,10 +59,3 @@ package "ubuntu-wallpapers-utopic"
 package "ubuntu-wallpapers-vivid"
 package "ubuntu-wallpapers-wily"
 package "ubuntu-wallpapers-xenial"
-
-# Some basic UI config changes
-script_after "
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ launcher-minimize-window true
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity 0.36
-gsettings set org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ panel-opacity-maximized-toggle true
-"
