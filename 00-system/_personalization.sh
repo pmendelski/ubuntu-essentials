@@ -92,3 +92,8 @@ gsettings set org.gnome.gedit.preferences.editor syntax-highlighting true
 # Prompt settings
 # PROMPT_DEFAULT_USERHOST="pawel.mendelski@polpc02153"
 # __FLEXI_PROMPT_SHLVL=2
+#
+# # Install skype
+# https://get.skype.com/go/getskype-linux-beta-ubuntu-64
+#
+# Add links to /usr/bin
