@@ -24,6 +24,9 @@ package "compizconfig-settings-manager"
 package "compiz-plugins-extra"
 package "dconf-editor"
 
+# nice system info
+package "screenfetch"
+
 # Logitech unifying receiver
 # http://www.omgubuntu.co.uk/2013/12/logitech-unifying-receiver-linux-solaar
 # repository "ppa:daniel.pavel/solaar"
