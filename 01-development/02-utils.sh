@@ -9,6 +9,7 @@ package "jq"
 
 # Geeky editor
 package "vim-gtk"
+package "vim-nox"
 
 # Pygmentize
 package "python-pygments"

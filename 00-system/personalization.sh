@@ -24,8 +24,11 @@ package "compizconfig-settings-manager"
 package "compiz-plugins-extra"
 package "dconf-editor"
 
+# disk partitioning tool
+package "gparted"
+
 # nice system info
-package "screenfetch"
+# package "screenfetch"
 
 # Logitech unifying receiver
 # http://www.omgubuntu.co.uk/2013/12/logitech-unifying-receiver-linux-solaar
@@ -46,6 +49,11 @@ package "arc-theme"
 # Moka icon theme
 repository "ppa:moka/daily"
 package "moka-icon-theme"
+
+# Papirus icon theme
+# http://www.omgubuntu.co.uk/2016/11/papirus-icon-theme-drops-ppa
+# sudo cp .icons/Papirus/48x48/places/distributor-logo-ubuntu.svg /usr/share/themes/Arc-Darker/unity/launcher_bfb.svg
+wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install-papirus-home-gtk.sh | sh
 
 # Wallpapers from previous versions
 package "ubuntu-wallpapers-karmic"
