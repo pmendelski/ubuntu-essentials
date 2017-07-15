@@ -31,6 +31,7 @@ sudo ln -s "/usr/lib/sbt/sbt-${version}" "/usr/lib/sbt/default"
 for binfile in $(find /usr/lib/sbt/sbt-${version} -executable -type f); do
     declare binname="$(basename $binfile)"
     sudo update-alternatives --install "/usr/bin/$binname" "$binname" "$binfile" 1000
+    sudo update-alternatives --force --set "$binname" "$binfile"
 done;
 
 # Add system variables

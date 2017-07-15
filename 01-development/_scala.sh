@@ -21,6 +21,7 @@ sudo ln -s "/usr/lib/scala/scala-${version}" "/usr/lib/scala/default"
 for binfile in $(find /usr/lib/scala/scala-${version}/bin -executable -type f ! -name "*.bat"); do
     declare binname="$(basename $binfile)"
     sudo update-alternatives --install "/usr/bin/$binname" "$binname" "$binfile" 1000
+    sudo update-alternatives --force --set "$binname" "$binfile"
 done;
 
 # Add system variables

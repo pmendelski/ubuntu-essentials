@@ -3,10 +3,10 @@
 # Chromium
 package "chromium-browser"
 package "chromium-codecs-ffmpeg-extra"
-package "pepperflashplugin-nonfree"
+package "adobe-flashplugin"
 script_after "
 sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/chromium-browser 50
-sudo update-pepperflashplugin-nonfree --install
+sudo update-alternatives --force --set x-www-browser /usr/bin/chromium-browser
 "
 
 # Chrome

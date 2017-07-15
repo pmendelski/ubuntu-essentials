@@ -21,6 +21,7 @@ sudo ln -s "/usr/lib/ant/apache-ant-${version}" "/usr/lib/ant/default"
 for binfile in $(find /usr/lib/ant/apache-ant-${version}/bin -executable -type f ! -name "*.bat" ! -name "*.py" ! -name "*.pl"); do
     declare binname="$(basename $binfile)"
     sudo update-alternatives --install "/usr/bin/$binname" "$binname" "$binfile" 1000
+    sudo update-alternatives --force --set "$binname" "$binfile"
 done;
 
 # Add system variables
