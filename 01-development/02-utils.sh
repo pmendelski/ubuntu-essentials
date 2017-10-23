@@ -4,6 +4,9 @@
 package "curl"
 package "httpie"
 
+# HTTP utils like dig
+package "dnsutils"
+
 # JSON parser
 package "jq"
 
