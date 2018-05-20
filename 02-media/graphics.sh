@@ -1,4 +1,10 @@
-#!/bin/bash
+#!/bin/bash -e
 
-package "gimp" "gthumb" "gimp-data" "gimp-plugin-registry" "gimp-data-extras"
+source $(dirname "${BASH_SOURCE[0]}")/../utils/install.sh
+
+# Gimp
+package gimp
+package gimp-data
+package gimp-plugin-registry
+package gimp-data-extras
 

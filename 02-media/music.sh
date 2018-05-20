@@ -1,8 +1,16 @@
-#!/bin/bash
+#!/bin/bash -e
+
+source $(dirname "${BASH_SOURCE[0]}")/../utils/install.sh
 
 # Music tag tools
-package "tagtool" "picard"
+snap picard
+
 # Music player
-package "audacious"
+snap deepin-music
+snap google-play-music-desktop-player
+
 # Sound format converter
-package "soundconverter"
+package soundconverter
+
+# Spotify
+snap spotify

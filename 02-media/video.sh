@@ -1,9 +1,19 @@
-#!/bin/bash
+#!/bin/bash -e
 
-package "vlc"
-package "ffmpeg"
-package "qnapi"
+source $(dirname "${BASH_SOURCE[0]}")/../utils/install.sh
 
-# Video DVD
-# http://ubuntuforums.org/showthread.php?t=1607915&p=10039218#post10039218
-package "libdvdread4" "libdvdnav4"
+# Best movie player
+snap vlc
+snap ffmpeg
+
+# Subtitle downloader
+package qnapi
+
+# Camera recorder
+package cheese
+
+# Video editor
+package kdenlive
+
+# Screen recorder
+package kazam

@@ -1,17 +1,9 @@
-#!/bin/bash
+#!/bin/bash -e
+
+source $(dirname "${BASH_SOURCE[0]}")/../utils/install.sh
 
 # Chromium
-package "chromium-browser"
-package "chromium-codecs-ffmpeg-extra"
-package "adobe-flashplugin"
-script_after "
-sudo update-alternatives --install /usr/bin/x-www-browser x-www-browser /usr/bin/chromium-browser 50
-sudo update-alternatives --force --set x-www-browser /usr/bin/chromium-browser
-"
+snap chromium
 
 # Chrome
-script_before "
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-sudo sh -c 'echo \"deb http://dl.google.com/linux/chrome/deb/ stable main\" >> /etc/apt/sources.list.d/google-chrome.list'
-"
-package "google-chrome-stable"
+deb "https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
