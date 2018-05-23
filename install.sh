@@ -16,8 +16,7 @@ install() {
   local -r file="$1"
   printInfo "Installing file: $file"
   if [ $dryrun = 0 ]; then
-    echo "#"
-    # source $file
+    source $file
   fi
 }
 
@@ -118,6 +117,7 @@ while (("$#")); do
       nocolor=1
       ;;
     --dryrun|-d)
+      printInfo "Dry run mode enabled"
       dryrun=1
       ;;
     --verbose|-v)
