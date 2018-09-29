@@ -37,6 +37,8 @@ package chrome-gnome-shell
 # https://addons.mozilla.org/firefox/addon/gsconnect/
 # https://extensions.gnome.org/extension/723/pixel-saver/
 # https://extensions.gnome.org/extension/744/hide-activities-button/
+# https://extensions.gnome.org/extension/39/put-windows/
+# https://extensions.gnome.org/extension/1267/no-title-bar/
 
 # Needed for system monitor applet
 # https://extensions.gnome.org/extension/120/system-monitor/ - it's the best but sometimes freezes

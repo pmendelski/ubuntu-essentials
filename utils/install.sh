@@ -38,7 +38,7 @@ deb() {
 
 aptKey() {
   local -r url="$1"
-  wget -q "$url" -O- | sudo apt-key add -
+  wget -q0 - "$url" | sudo apt-key add -
 }
 
 aptSource() {

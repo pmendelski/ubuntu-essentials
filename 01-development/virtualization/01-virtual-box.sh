@@ -19,7 +19,7 @@ installVirtualBoxExtPack() {
   local -r version="$(vboxmanage -v | grep -oP "\d+\.\d+\.\d+")"
   local -r file="Oracle_VM_VirtualBox_Extension_Pack-$version.vbox-extpack"
   local -r tmp="$(createTmpDir vboxext)"
-  download "http://download.virtualbox.org/virtualbox/$version/$file" -O "$tmp/$file"
+  download "http://download.virtualbox.org/virtualbox/$version/$file" "$tmp/$file"
   echo y | sudo vboxmanage extpack install "$tmp/$file" --replace
   removeTmpDir "$tmp"
 }

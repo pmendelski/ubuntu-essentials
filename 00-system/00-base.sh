@@ -37,6 +37,9 @@ package xsel
 package moreutils
 package tree
 
+# Listen to file changes
+package inotify-tools
+
 # Looking for files inside packages
 # Example: apt-file search /usr/lib/jvm/java-6-openjdk/jre/lib/i386/xawt/libmawt.so
 # See: https://www.howtoforge.com/apt_file_debian_ubuntu

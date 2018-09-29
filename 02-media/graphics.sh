@@ -8,3 +8,5 @@ package gimp-data
 package gimp-plugin-registry
 package gimp-data-extras
 
+# Inkscape
+snap inkscape

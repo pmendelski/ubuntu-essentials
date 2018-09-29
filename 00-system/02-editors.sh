@@ -12,6 +12,9 @@ package gedit-plugins
 # Sublime
 snap sublime-text
 
+# Visual studio code
+snap vscode
+
 # Atom
 snap atom
 printInfo "Installing atom packages"
@@ -25,6 +28,7 @@ apm install \
   linter-eslint \
   linter-lua \
   language-lua \
+  language-roff \
   merge-conflicts \
   minimap \
   minimap-highlight-selected \

@@ -12,8 +12,5 @@ package qnapi
 # Camera recorder
 package cheese
 
-# Video editor
-package kdenlive
-
 # Screen recorder
 package kazam
