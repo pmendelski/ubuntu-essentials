@@ -13,7 +13,7 @@ installDocker() {
 
 installDockerCompose() {
   printInfo "Installing Docker Compose"
-  local -r version="$(curl -s -L https://github.com/docker/compose/releases | grep docker-compose | head -n 1 | grep -Po '\d+.\d+.\d+' | head -n 1)"
+  local -r version="$(curl -s -L https://github.com/docker/compose/releases | grep docker-compose | grep -Po '\d+.\d+.\d+(?=/)' | head -n 1)"
   local -r downloadUrl="https://github.com/docker/compose/releases/download/${version}/docker-compose-$(uname -s)-$(uname -m)"
   local -r dest="/usr/local/bin/docker-compose"
   sudo rm -f "$dest"

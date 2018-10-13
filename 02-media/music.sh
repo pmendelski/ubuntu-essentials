@@ -6,8 +6,10 @@ source $(dirname "${BASH_SOURCE[0]}")/../utils/install.sh
 snap picard
 
 # Music player
-snap deepin-music
-snap google-play-music-desktop-player
+package audacious
+
+# Music editor
+snap audacity
 
 # Sound format converter
 package soundconverter

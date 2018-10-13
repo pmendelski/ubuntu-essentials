@@ -3,7 +3,7 @@
 source $(dirname "${BASH_SOURCE[0]}")/../utils/install.sh
 
 # eBook reader
-snap bookworm
+package calibre
 
 # Adobe Reader
 # See: https://linuxconfig.org/how-to-install-adobe-acrobat-reader-on-ubuntu-18-04-bionic-beaver-linux
